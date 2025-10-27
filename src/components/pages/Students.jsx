@@ -114,9 +114,13 @@ const handleSubmitStudent = async (studentData) => {
     setIsSubmitting(true);
     try {
       if (editingStudent) {
+if (!editingStudent?.Id) {
+          toast.error('Invalid student data - missing ID');
+          return;
+        }
         const updated = await studentService.update(editingStudent.Id, studentData);
         setStudents(prev => prev.map(s => 
-          s.Id === editingStudent.Id ? { ...s, ...updated } : s
+          s.Id === editingStudent.Id ? { ...s, ...updated, Id: editingStudent.Id } : s
         ));
         toast.success('Student updated successfully');
       } else {
