@@ -62,10 +62,9 @@ const navItems = [
           <div className="md:hidden">
             <button className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50">
               <ApperIcon name="Menu" className="w-5 h-5" />
-            </button>
+</button>
           </div>
         </div>
-</div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden border-t border-gray-200/80">
