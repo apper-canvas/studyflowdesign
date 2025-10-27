@@ -5,28 +5,28 @@ import Select from "@/components/atoms/Select";
 import { toast } from "react-toastify";
 
 const CourseForm = ({ course, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    code: "",
-    instructor: "",
-    color: "#6366f1",
-    credits: 3,
-    semester: "Fall 2024",
-    schedule: [{ day: "Monday", time: "10:00 AM - 11:30 AM" }]
+const [formData, setFormData] = useState({
+    name_c: "",
+    code_c: "",
+    instructor_c: "",
+    color_c: "#6366f1",
+    credits_c: 3,
+    semester_c: "Fall 2024",
+    schedule_c: [{ day: "Monday", time: "10:00 AM - 11:30 AM" }]
   });
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (course) {
+if (course) {
       setFormData({
-        name: course.name || "",
-        code: course.code || "",
-        instructor: course.instructor || "",
-        color: course.color || "#6366f1",
-        credits: course.credits || 3,
-        semester: course.semester || "Fall 2024",
-        schedule: course.schedule || [{ day: "Monday", time: "10:00 AM - 11:30 AM" }]
+        name_c: course.name_c || "",
+        code_c: course.code_c || "",
+        instructor_c: course.instructor_c || "",
+        color_c: course.color_c || "#6366f1",
+        credits_c: course.credits_c || 3,
+        semester_c: course.semester_c || "Fall 2024",
+        schedule_c: course.schedule_c || [{ day: "Monday", time: "10:00 AM - 11:30 AM" }]
       });
     }
   }, [course]);
@@ -96,25 +96,25 @@ const CourseForm = ({ course, onSubmit, onCancel }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
           label="Course Name *"
-          value={formData.name}
-          onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+value={formData.name_c}
+          onChange={(e) => setFormData(prev => ({ ...prev, name_c: e.target.value }))}
           placeholder="e.g., Computer Science Fundamentals"
           required
         />
 
         <Input
-          label="Course Code *"
-          value={formData.code}
-          onChange={(e) => setFormData(prev => ({ ...prev, code: e.target.value }))}
+label="Course Code *"
+          value={formData.code_c}
+          onChange={(e) => setFormData(prev => ({ ...prev, code_c: e.target.value }))}
           placeholder="e.g., CS 101"
           required
         />
       </div>
 
       <Input
-        label="Instructor"
-        value={formData.instructor}
-        onChange={(e) => setFormData(prev => ({ ...prev, instructor: e.target.value }))}
+label="Instructor"
+        value={formData.instructor_c}
+        onChange={(e) => setFormData(prev => ({ ...prev, instructor_c: e.target.value }))}
         placeholder="e.g., Dr. Sarah Johnson"
       />
 
@@ -125,12 +125,12 @@ const CourseForm = ({ course, onSubmit, onCancel }) => {
           </label>
           <div className="flex items-center space-x-3">
             <div 
-              className="w-10 h-10 rounded-lg border-2 border-gray-200"
-              style={{ backgroundColor: formData.color }}
+className="w-10 h-10 rounded-lg border-2 border-gray-200"
+              style={{ backgroundColor: formData.color_c }}
             />
             <Select
-              value={formData.color}
-              onChange={(e) => setFormData(prev => ({ ...prev, color: e.target.value }))}
+              value={formData.color_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, color_c: e.target.value }))}
             >
               {colorOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -142,9 +142,9 @@ const CourseForm = ({ course, onSubmit, onCancel }) => {
         </div>
 
         <Select
-          label="Credits"
-          value={formData.credits}
-          onChange={(e) => setFormData(prev => ({ ...prev, credits: parseInt(e.target.value) }))}
+label="Credits"
+          value={formData.credits_c}
+          onChange={(e) => setFormData(prev => ({ ...prev, credits_c: parseInt(e.target.value) }))}
         >
           {[1, 2, 3, 4, 5, 6].map(credit => (
             <option key={credit} value={credit}>{credit}</option>
@@ -152,9 +152,9 @@ const CourseForm = ({ course, onSubmit, onCancel }) => {
         </Select>
 
         <Select
-          label="Semester"
-          value={formData.semester}
-          onChange={(e) => setFormData(prev => ({ ...prev, semester: e.target.value }))}
+label="Semester"
+          value={formData.semester_c}
+          onChange={(e) => setFormData(prev => ({ ...prev, semester_c: e.target.value }))}
         >
           {semesterOptions.map(semester => (
             <option key={semester} value={semester}>{semester}</option>
@@ -180,7 +180,7 @@ const CourseForm = ({ course, onSubmit, onCancel }) => {
         </div>
         
         <div className="space-y-3">
-          {formData.schedule.map((slot, index) => (
+{formData.schedule_c.map((slot, index) => (
             <div key={index} className="flex items-center space-x-3">
               <Select
                 value={slot.day}

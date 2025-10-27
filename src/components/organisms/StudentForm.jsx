@@ -4,26 +4,26 @@ import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 
 function StudentForm({ onSubmit, onCancel, isLoading, initialStudent }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    major: '',
-    year: '',
-    gpa: '',
-    enrollmentDate: ''
+const [formData, setFormData] = useState({
+    name_c: '',
+    email_c: '',
+    phone_c: '',
+    major_c: '',
+    year_c: '',
+    gpa_c: '',
+    enrollment_date_c: ''
   });
 
   useEffect(() => {
-    if (initialStudent) {
+if (initialStudent) {
       setFormData({
-        name: initialStudent.name || '',
-        email: initialStudent.email || '',
-        phone: initialStudent.phone || '',
-        major: initialStudent.major || '',
-        year: initialStudent.year || '',
-        gpa: initialStudent.gpa || '',
-        enrollmentDate: initialStudent.enrollmentDate || ''
+        name_c: initialStudent.name_c || '',
+        email_c: initialStudent.email_c || '',
+        phone_c: initialStudent.phone_c || '',
+        major_c: initialStudent.major_c || '',
+        year_c: initialStudent.year_c || '',
+        gpa_c: initialStudent.gpa_c || '',
+        enrollment_date_c: initialStudent.enrollment_date_c || ''
       });
     }
   }, [initialStudent]);
@@ -32,21 +32,21 @@ function StudentForm({ onSubmit, onCancel, isLoading, initialStudent }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+if (!formData.name_c.trim()) {
+      newErrors.name_c = 'Name is required';
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+    if (!formData.email_c.trim()) {
+      newErrors.email_c = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_c)) {
+      newErrors.email_c = 'Please enter a valid email address';
     }
 
-if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year > 4)) {
-      newErrors.year = 'Year must be between 1 and 4';
+    if (formData.year_c && (isNaN(formData.year_c) || formData.year_c < 1 || formData.year_c > 4)) {
+      newErrors.year_c = 'Year must be between 1 and 4';
     }
-    if (formData.gpa && (isNaN(formData.gpa) || formData.gpa < 0 || formData.gpa > 4)) {
-      newErrors.gpa = 'GPA must be between 0.0 and 4.0';
+    if (formData.gpa_c && (isNaN(formData.gpa_c) || formData.gpa_c < 0 || formData.gpa_c > 4)) {
+      newErrors.gpa_c = 'GPA must be between 0.0 and 4.0';
     }
 
     setErrors(newErrors);
@@ -83,10 +83,10 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
         </label>
         <Input
           name="name"
-          value={formData.name}
+value={formData.name_c}
           onChange={handleChange}
           placeholder="Enter student name"
-          className={errors.name ? 'border-red-500' : ''}
+          className={errors.name_c ? 'border-red-500' : ''}
           disabled={isLoading}
         />
         {errors.name && (
@@ -100,11 +100,11 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
         </label>
         <Input
           type="email"
-          name="email"
-          value={formData.email}
+name="email_c"
+          value={formData.email_c}
           onChange={handleChange}
           placeholder="student@example.com"
-          className={errors.email ? 'border-red-500' : ''}
+          className={errors.email_c ? 'border-red-500' : ''}
           disabled={isLoading}
         />
         {errors.email && (
@@ -117,9 +117,9 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
           Phone
         </label>
         <Input
-          type="tel"
-          name="phone"
-          value={formData.phone}
+type="tel"
+          name="phone_c"
+          value={formData.phone_c}
           onChange={handleChange}
           placeholder="(555) 123-4567"
           disabled={isLoading}
@@ -131,8 +131,8 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
           Major
         </label>
         <Input
-          name="major"
-          value={formData.major}
+name="major_c"
+          value={formData.major_c}
           onChange={handleChange}
           placeholder="e.g., Computer Science"
           disabled={isLoading}
@@ -146,12 +146,12 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
         <Input
           type="number"
           name="year"
-          value={formData.year}
+value={formData.year_c}
           onChange={handleChange}
           placeholder="1-4"
           min="1"
           max="4"
-          className={errors.year ? 'border-red-500' : ''}
+          className={errors.year_c ? 'border-red-500' : ''}
           disabled={isLoading}
         />
         {errors.year && (
@@ -166,13 +166,13 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
         <Input
           type="number"
           name="gpa"
-          value={formData.gpa}
+value={formData.gpa_c}
           onChange={handleChange}
           placeholder="0.0-4.0"
           min="0"
           max="4"
           step="0.01"
-          className={errors.gpa ? 'border-red-500' : ''}
+          className={errors.gpa_c ? 'border-red-500' : ''}
           disabled={isLoading}
         />
         {errors.gpa && (
@@ -186,8 +186,8 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
         </label>
         <Input
           type="date"
-          name="enrollmentDate"
-          value={formData.enrollmentDate}
+name="enrollment_date_c"
+          value={formData.enrollment_date_c}
           onChange={handleChange}
           disabled={isLoading}
         />

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { cn } from "@/utils/cn";
+import { useAuth } from "@/layouts/Root";
 import ApperIcon from "@/components/ApperIcon";
-
+import Button from "@/components/atoms/Button";
+import { cn } from "@/utils/cn";
 const Header = () => {
   const location = useLocation();
 
@@ -64,10 +65,11 @@ const navItems = [
             </button>
           </div>
         </div>
+</div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden border-t border-gray-200/80">
-<div className="grid grid-cols-5 gap-1 py-2">
+          <div className="grid grid-cols-5 gap-1 py-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -85,8 +87,28 @@ const navItems = [
             ))}
           </div>
         </div>
+
+        <div className="flex items-center">
+          <LogoutButton />
+        </div>
       </div>
     </header>
+  );
+};
+
+const LogoutButton = () => {
+  const { logout } = useAuth();
+  
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={logout}
+      icon="LogOut"
+      className="text-gray-700 hover:text-primary"
+    >
+      Logout
+    </Button>
   );
 };
 

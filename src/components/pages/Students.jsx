@@ -24,13 +24,13 @@ const [expandedStudent, setExpandedStudent] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
 const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    major: '',
-    year: '',
-    gpa: '',
-    enrollmentDate: ''
+name_c: '',
+    email_c: '',
+    phone_c: '',
+    major_c: '',
+    year_c: '',
+    gpa_c: '',
+    enrollment_date_c: ''
   });
 
 const loadStudents = async () => {
@@ -58,14 +58,14 @@ const loadStudents = async () => {
     
     if (searchTerm) {
       filtered = filtered.filter(s => 
-        s?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        s?.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        s?.major?.toLowerCase().includes(searchTerm.toLowerCase())
+s?.name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        s?.email_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        s?.major_c?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     
     if (selectedGrade !== 'all') {
-      filtered = filtered.filter(s => s?.year === selectedGrade);
+      filtered = filtered.filter(s => s?.year_c === selectedGrade);
     }
     
     setFilteredStudents(filtered);
@@ -89,13 +89,13 @@ const handleOpenModal = (student = null) => {
 if (student) {
       setEditingStudent(student);
       setFormData({
-        name: student.name || '',
-        email: student.email || '',
-        phone: student.phone || '',
-        major: student.major || '',
-        year: student.year || '',
-        gpa: student.gpa || '',
-        enrollmentDate: student.enrollmentDate || ''
+        name_c: student.name_c || '',
+        email_c: student.email_c || '',
+        phone_c: student.phone_c || '',
+        major_c: student.major_c || '',
+        year_c: student.year_c || '',
+        gpa_c: student.gpa_c || '',
+        enrollment_date_c: student.enrollment_date_c || ''
       });
     } else {
       setEditingStudent(null);
@@ -129,11 +129,10 @@ name: '',
 const handleSubmitStudent = async (studentData) => {
     setIsSubmitting(true);
     try {
-      if (editingStudent && editingStudent.Id) {
-        // Updating existing student
+if (editingStudent && editingStudent.Id) {
         const updated = await studentService.update(editingStudent.Id, studentData);
         setStudents(prev => prev.map(s => 
-          s.Id === editingStudent.Id ? { ...s, ...updated, Id: editingStudent.Id } : s
+          s.Id === editingStudent.Id ? updated : s
         ));
         toast.success('Student updated successfully');
       } else {
@@ -208,8 +207,8 @@ return (
                     <ApperIcon name="User" size={24} className="text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">{student.name}</h3>
-                    <p className="text-sm text-gray-600">{student.year}</p>
+<h3 className="font-semibold text-gray-900">{student.name_c}</h3>
+                    <p className="text-sm text-gray-600">{student.year_c}</p>
                   </div>
                 </div>
               </div>
@@ -217,19 +216,19 @@ return (
               <div className="space-y-2 mb-4">
                 <div className="flex items-center gap-2 text-sm">
                   <ApperIcon name="Mail" size={16} className="text-gray-400" />
-                  <span className="text-gray-700">{student.email}</span>
+<span className="text-gray-700">{student.email_c}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <ApperIcon name="Phone" size={16} className="text-gray-400" />
-                  <span className="text-gray-700">{student.phone}</span>
+<span className="text-gray-700">{student.phone_c}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <ApperIcon name="BookOpen" size={16} className="text-gray-400" />
-                  <span className="text-gray-700">{student.major}</span>
+<span className="text-gray-700">{student.major_c}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <ApperIcon name="Award" size={16} className="text-gray-400" />
-                  <span className="text-gray-700">GPA: {student.gpa}</span>
+<span className="text-gray-700">GPA: {student.gpa_c}</span>
                 </div>
               </div>
 
