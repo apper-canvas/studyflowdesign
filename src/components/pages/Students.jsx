@@ -69,12 +69,6 @@ const [expandedStudent, setExpandedStudent] = useState(null);
     }
   }
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
 const handleOpenModal = (student = null) => {
     if (student) {
       setEditingStudent(student);
@@ -102,9 +96,7 @@ const handleOpenModal = (student = null) => {
     setIsModalOpen(true);
   };
 
-  function handleCloseModal() {
-
-  function handleCloseModal() {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
     setEditingStudent(null);
     setFormData({
@@ -116,7 +108,7 @@ const handleOpenModal = (student = null) => {
       gpa: '',
       enrollmentDate: ''
     });
-}
+  };
 
   const handleSubmitStudent = async (studentData) => {
     setIsSubmitting(true);
@@ -262,7 +254,5 @@ return (
     </div>
   );
 }
-
-export default Students;
 
 export default Students;
