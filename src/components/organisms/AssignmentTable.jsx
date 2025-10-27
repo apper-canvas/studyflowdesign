@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
+import { motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
 import Badge from "@/components/atoms/Badge";
 import Select from "@/components/atoms/Select";
+import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
-import ApperIcon from "@/components/ApperIcon";
-import { motion } from "framer-motion";
+import Card from "@/components/atoms/Card";
+import Courses from "@/components/pages/Courses";
+import Assignments from "@/components/pages/Assignments";
 
 const AssignmentTable = ({ assignments, courses, onEdit, onDelete, onToggleStatus }) => {
   const [filter, setFilter] = useState({ course: "all", status: "all", priority: "all" });
@@ -14,7 +16,7 @@ const AssignmentTable = ({ assignments, courses, onEdit, onDelete, onToggleStatu
 
   // Filter assignments
 const filteredAssignments = assignments
-    .filter(assignment => {
+.filter(assignment => {
       const course = courses.find(c => c.Id.toString() === assignment.course_id_c.toString());
       const matchesSearch = assignment.title_c.toLowerCase().includes(search.toLowerCase()) ||
                           course?.name_c.toLowerCase().includes(search.toLowerCase());
@@ -60,8 +62,8 @@ const filteredAssignments = assignments
             >
               <option value="all">All Courses</option>
               {courses.map(course => (
-                <option key={course.Id} value={course.Id.toString()}>
-                  {course.name}
+<option key={course.Id} value={course.Id.toString()}>
+                  {course.name_c}
                 </option>
               ))}
             </Select>
@@ -103,22 +105,23 @@ const filteredAssignments = assignments
             </tr>
           </thead>
           <tbody>
-            {filteredAssignments.map((assignment, index) => {
-              const course = courses.find(c => c.Id.toString() === assignment.courseId);
+{filteredAssignments.map((assignment, index) => {
+              const course = courses.find(c => c.Id.toString() === assignment.course_id_c.toString());
+
               return (
                 <motion.tr
                   key={assignment.Id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.05 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, delay: index * 0.05 }}
                   className="border-b border-gray-100 hover:bg-gray-50"
                 >
                   <td className="p-4">
                     <div>
-                      <h3 className="font-medium text-gray-900">{assignment.title}</h3>
-                      {assignment.description && (
-                        <p className="text-sm text-gray-500 truncate max-w-xs">
-                          {assignment.description}
+                      <h3 className="font-medium text-gray-900">{assignment.title_c}</h3>
+                      {assignment.description_c && (
+                        <p className="text-sm text-gray-500 mt-1 truncate max-w-xs">
+                          {assignment.description_c}
                         </p>
                       )}
                     </div>
@@ -127,44 +130,45 @@ const filteredAssignments = assignments
                     <div className="flex items-center space-x-2">
                       <div 
                         className="w-3 h-3 rounded-full"
-                        style={{ backgroundColor: course?.color || "#6366f1" }}
+                        style={{ backgroundColor: course?.color_c || "#6366f1" }}
                       />
-                      <span className="text-sm text-gray-900">{course?.name}</span>
+                      <span className="text-sm text-gray-900">{course?.name_c}</span>
                     </div>
                   </td>
                   <td className="p-4">
                     <div className="text-sm text-gray-900">
-                      {format(new Date(assignment.dueDate), "MMM d, yyyy")}
+                      {format(new Date(assignment.due_date_c), "MMM d, yyyy")}
                     </div>
                     <div className="text-xs text-gray-500">
-                      {format(new Date(assignment.dueDate), "h:mm a")}
+                      {format(new Date(assignment.due_date_c), "h:mm a")}
                     </div>
                   </td>
                   <td className="p-4">
-                    <Badge variant={assignment.priority}>
-                      <ApperIcon name={getPriorityIcon(assignment.priority)} className="w-3 h-3 mr-1" />
-                      {assignment.priority}
+                    <Badge variant={assignment.priority_c}>
+                      <ApperIcon name={getPriorityIcon(assignment.priority_c)} className="w-3 h-3 mr-1" />
+                      {assignment.priority_c}
                     </Badge>
                   </td>
                   <td className="p-4">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => onToggleStatus(assignment)}
-                      className="p-1"
+                    <div 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleStatus(assignment.Id);
+                      }}
+                      className="cursor-pointer"
                     >
-                      <Badge variant={assignment.status}>
-                        <ApperIcon name={getStatusIcon(assignment.status)} className="w-3 h-3 mr-1" />
-                        {assignment.status}
+                      <Badge variant={assignment.status_c}>
+                        <ApperIcon name={getStatusIcon(assignment.status_c)} className="w-3 h-3 mr-1" />
+                        {assignment.status_c}
                       </Badge>
-                    </Button>
+                    </div>
                   </td>
                   <td className="p-4">
-                    <span className="text-sm font-medium text-gray-900">
-                      {assignment.grade ? `${assignment.grade}%` : "-"}
-                    </span>
+                    <div className="text-sm font-medium text-gray-900">
+                      {assignment.grade_c ? `${assignment.grade_c}%` : "-"}
+                    </div>
                   </td>
-                  <td className="p-4 text-right">
+                  <td className="p-4">
                     <div className="flex items-center justify-end space-x-1">
                       <Button
                         variant="ghost"

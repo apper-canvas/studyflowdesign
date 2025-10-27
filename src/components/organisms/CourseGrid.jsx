@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 
 const CourseGrid = ({ courses, onEdit, onDelete, onViewDetails }) => {
   return (
@@ -18,12 +18,11 @@ const CourseGrid = ({ courses, onEdit, onDelete, onViewDetails }) => {
             <div className="flex items-start justify-between mb-4">
               <div 
                 className="w-12 h-12 rounded-xl flex items-center justify-center"
-                style={{ backgroundColor: `${course.color}20` }}
+style={{ backgroundColor: `${course.color_c}20` }}
               >
-                <ApperIcon 
-                  name="BookOpen" 
-                  className="w-6 h-6"
-                  style={{ color: course.color }}
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{ backgroundColor: course.color_c }}
                 />
               </div>
               <div className="flex space-x-1">
@@ -52,37 +51,36 @@ const CourseGrid = ({ courses, onEdit, onDelete, onViewDetails }) => {
               </div>
             </div>
 
-            <div className="mb-4">
-              <h3 className="font-semibold text-gray-900 mb-1">{course.name}</h3>
-              <p className="text-sm text-gray-500">{course.code}</p>
-              <p className="text-sm text-gray-500">{course.instructor}</p>
+<div className="mb-4">
+              <h3 className="font-semibold text-gray-900 mb-1">{course.name_c}</h3>
+              <p className="text-sm text-gray-500">{course.code_c}</p>
+              <p className="text-sm text-gray-500">{course.instructor_c}</p>
             </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center text-sm text-gray-600">
-                <ApperIcon name="Calendar" className="w-4 h-4 mr-2" />
-                <span>{course.credits} credits</span>
-              </div>
-              {course.schedule && course.schedule.length > 0 && (
-                <div className="flex items-start text-sm text-gray-600">
-                  <ApperIcon name="Clock" className="w-4 h-4 mr-2 mt-0.5" />
-                  <div>
-                    {course.schedule.map((sched, idx) => (
-                      <div key={idx}>
-                        {sched.day} {sched.time}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+            {/* Course Details */}
+            <div className="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+              <ApperIcon name="Calendar" className="w-4 h-4 mr-2" />
+              <span>{course.credits_c} credits</span>
             </div>
+            {course.schedule_c && course.schedule_c.length > 0 && (
+              <div className="space-y-1">
+                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <ApperIcon name="Clock" className="w-4 h-4" />
+                  {course.schedule_c.map((sched, idx) => (
+                    <div key={idx}>
+                      {sched.day} {sched.time}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div 
               className="mt-4 pt-4 border-t-2"
               style={{ borderColor: `${course.color}40` }}
             >
-              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-                {course.semester}
+<span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                {course.semester_c}
               </span>
             </div>
           </Card>

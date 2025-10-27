@@ -58,6 +58,11 @@ const navItems = [
             ))}
           </nav>
 
+          {/* User Actions */}
+          <div className="flex items-center">
+            <LogoutButton />
+          </div>
+
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50">
@@ -85,10 +90,6 @@ const navItems = [
               </Link>
             ))}
           </div>
-        </div>
-
-        <div className="flex items-center">
-          <LogoutButton />
         </div>
       </div>
     </header>

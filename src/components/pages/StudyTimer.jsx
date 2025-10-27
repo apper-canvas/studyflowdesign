@@ -45,7 +45,7 @@ function StudyTimer() {
     try {
       setLoading(true);
       const data = await studySessionService.getAll();
-      setSessions(data.sort((a, b) => new Date(b.endTime) - new Date(a.endTime)).slice(0, 10));
+setSessions(data.sort((a, b) => new Date(b.end_time_c) - new Date(a.end_time_c)).slice(0, 10));
     } catch (error) {
       toast.error('Failed to load session history');
     } finally {
@@ -237,10 +237,10 @@ try {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-800">
-                          {formatDuration(session.duration_c)}
+{formatDuration(session.duration_c)}
                         </div>
                         <div className="text-sm text-gray-500">
-                          {format(new Date(session.endTime), 'MMM d, yyyy • h:mm a')}
+                          {format(new Date(session.end_time_c), 'MMM d, yyyy • h:mm a')}
                         </div>
                       </div>
                     </div>

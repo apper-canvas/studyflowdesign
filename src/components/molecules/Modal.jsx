@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
+import { cn } from "@/utils/cn";
 
 const Modal = ({ 
   isOpen, 
@@ -77,9 +78,4 @@ const Modal = ({
     </AnimatePresence>
   );
 };
-
-const cn = (...classes) => {
-  return classes.filter(Boolean).join(" ");
-};
-
 export default Modal;

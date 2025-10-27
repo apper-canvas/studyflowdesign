@@ -81,16 +81,16 @@ if (!formData.name_c.trim()) {
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Name <span className="text-red-500">*</span>
         </label>
-        <Input
-          name="name"
-value={formData.name_c}
+<Input
+name="name_c"
+          value={formData.name_c}
           onChange={handleChange}
-          placeholder="Enter student name"
-          className={errors.name_c ? 'border-red-500' : ''}
+          placeholder="John Doe"
           disabled={isLoading}
+          required
         />
-        {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+        {errors.name_c && (
+          <p className="text-red-500 text-sm mt-1">{errors.name_c}</p>
         )}
       </div>
 
@@ -107,8 +107,8 @@ name="email_c"
           className={errors.email_c ? 'border-red-500' : ''}
           disabled={isLoading}
         />
-        {errors.email && (
-          <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+{errors.email_c && (
+          <p className="text-red-500 text-sm mt-1">{errors.email_c}</p>
         )}
       </div>
 
@@ -155,7 +155,7 @@ value={formData.year_c}
           disabled={isLoading}
         />
 {errors.year_c && (
-          <p className="text-red-500 text-sm mt-1">{errors.year}</p>
+<p className="text-red-500 text-sm mt-1">{errors.year_c}</p>
         )}
       </div>
 
@@ -176,7 +176,7 @@ value={formData.gpa_c}
           disabled={isLoading}
         />
 {errors.gpa_c && (
-          <p className="text-red-500 text-sm mt-1">{errors.gpa}</p>
+<p className="text-red-500 text-sm mt-1">{errors.gpa_c}</p>
         )}
       </div>
 

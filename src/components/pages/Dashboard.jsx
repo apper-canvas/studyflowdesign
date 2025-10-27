@@ -45,8 +45,8 @@ const Dashboard = () => {
       const newAssignment = await assignmentService.create(assignmentData);
       setAssignments(prev => [...prev, newAssignment]);
       setShowAssignmentModal(false);
-    } catch (error) {
-      throw error;
+} catch (error) {
+      console.error('Error loading dashboard data:', error);
     }
   };
 

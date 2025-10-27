@@ -49,7 +49,7 @@ const Courses = () => {
       setShowCourseModal(false);
       setEditingCourse(null);
     } catch (error) {
-      throw error;
+console.error('Error adding course:', error);
     }
   };
 
@@ -65,7 +65,7 @@ const Courses = () => {
         setViewingCourse(updatedCourse);
       }
     } catch (error) {
-      throw error;
+console.error('Error updating course:', error);
     }
   };
 
@@ -107,8 +107,8 @@ const Courses = () => {
       await assignmentService.create(assignmentData);
       setShowAssignmentModal(false);
       setSelectedCourse(null);
-    } catch (error) {
-      throw error;
+} catch (error) {
+      console.error('Error deleting course:', error);
     }
   };
 

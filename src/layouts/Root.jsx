@@ -73,7 +73,7 @@ export default function Root() {
 ApperUI.setup(apperClient, {
         target: "#authentication",
         clientId: import.meta.env.VITE_APPER_PROJECT_ID,
-        view: "both",
+view: "both",
         onSuccess: (user) => {
           if (user) {
             dispatch(setUser(user));
@@ -83,7 +83,11 @@ ApperUI.setup(apperClient, {
           }
           handleAuthComplete();
         },
-        onError: handleAuthError,
+        onError: (error) => {
+          console.error("Auth error:", error);
+          dispatch(clearUser());
+          handleAuthComplete();
+        },
       });
 
     } catch (error) {
@@ -91,22 +95,6 @@ ApperUI.setup(apperClient, {
       dispatch(clearUser());
       handleAuthComplete();
     }
-  };
-
-  const handleAuthSuccess = (user) => {
-    if (user) {
-      dispatch(setUser(user));
-      handleNavigation();
-    } else {
-      dispatch(clearUser());
-    }
-    handleAuthComplete();
-  };
-
-  const handleAuthError = (error) => {
-    console.error("Auth error:", error);
-    dispatch(clearUser());
-    handleAuthComplete();
   };
 
   const handleAuthComplete = () => {

@@ -6,15 +6,14 @@ import ApperIcon from "@/components/ApperIcon";
 import { motion } from "framer-motion";
 
 const RecentActivity = ({ assignments, courses }) => {
-  // Get upcoming assignments (next 7 days)
   const now = new Date();
   const upcoming = assignments
-    .filter(a => a.status === "pending")
+    .filter(a => a.status_c === "pending")
     .map(a => ({
       ...a,
-      course: courses.find(c => c.Id.toString() === a.courseId)
+      course: courses.find(c => c.Id.toString() === a.course_id_c.toString())
     }))
-    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+    .sort((a, b) => new Date(a.due_date_c) - new Date(b.due_date_c))
     .slice(0, 5);
 
   const formatDueDate = (dateString) => {
@@ -65,25 +64,25 @@ const RecentActivity = ({ assignments, courses }) => {
               transition={{ delay: index * 0.1 }}
               className="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors"
             >
-              <div className="flex items-center space-x-4">
+<div className="flex items-center space-x-4">
                 <div 
                   className="w-3 h-3 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: assignment.course?.color || "#6366f1" }}
+                  style={{ backgroundColor: assignment.course?.color_c || "#6366f1" }}
                 />
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-medium text-gray-900 truncate">{assignment.title}</h3>
-                  <p className="text-sm text-gray-500">{assignment.course?.name}</p>
+                  <h3 className="font-medium text-gray-900 truncate">{assignment.title_c}</h3>
+                  <p className="text-sm text-gray-500">{assignment.course?.name_c}</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
-                <Badge variant={assignment.priority}>{assignment.priority}</Badge>
+                <Badge variant={assignment.priority_c}>{assignment.priority_c}</Badge>
                 <div className="text-right">
-                  <div className={`text-sm font-medium ${getUrgencyColor(assignment.dueDate)}`}>
-                    {formatDueDate(assignment.dueDate)}
+                  <div className={`text-sm font-medium ${getUrgencyColor(assignment.due_date_c)}`}>
+                    {formatDueDate(assignment.due_date_c)}
                   </div>
                   <div className="text-xs text-gray-500">
-                    {format(new Date(assignment.dueDate), "h:mm a")}
+                    {format(new Date(assignment.due_date_c), "h:mm a")}
                   </div>
                 </div>
               </div>

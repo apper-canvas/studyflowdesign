@@ -50,8 +50,8 @@ const Assignments = () => {
       setAssignments(prev => [...prev, newAssignment]);
       setShowAssignmentModal(false);
       setEditingAssignment(null);
-    } catch (error) {
-      throw error;
+} catch (error) {
+      console.error('Error adding assignment:', error);
     }
   };
 
@@ -64,7 +64,7 @@ const Assignments = () => {
       setShowAssignmentModal(false);
       setEditingAssignment(null);
     } catch (error) {
-      throw error;
+console.error('Error updating assignment:', error);
     }
   };
 

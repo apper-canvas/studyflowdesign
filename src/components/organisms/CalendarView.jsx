@@ -23,8 +23,8 @@ const CalendarView = ({ assignments, courses }) => {
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       const cloneDay = day;
-      const dayAssignments = assignments.filter(assignment => 
-        isSameDay(new Date(assignment.dueDate), cloneDay)
+const dayAssignments = assignments.filter(assignment => 
+        isSameDay(new Date(assignment.due_date_c), cloneDay)
       );
 
       days.push(
@@ -47,19 +47,19 @@ const CalendarView = ({ assignments, courses }) => {
           
           <div className="space-y-1">
             {dayAssignments.slice(0, 2).map(assignment => {
-              const course = courses.find(c => c.Id.toString() === assignment.courseId);
+              const course = courses.find(c => c.Id.toString() === assignment.course_id_c.toString());
               return (
                 <div
                   key={assignment.Id}
                   className="p-1 rounded text-xs truncate cursor-pointer hover:shadow-sm transition-shadow"
                   style={{ 
-                    backgroundColor: `${course?.color || "#6366f1"}20`,
-                    borderLeft: `3px solid ${course?.color || "#6366f1"}`
+                    backgroundColor: `${course?.color_c || "#6366f1"}20`,
+                    borderLeft: `3px solid ${course?.color_c || "#6366f1"}`
                   }}
-                  title={`${assignment.title} - ${course?.name}`}
+                  title={`${assignment.title_c} - ${course?.name_c}`}
                 >
-                  <div className="font-medium truncate">{assignment.title}</div>
-                  <div className="text-gray-600 truncate">{course?.code}</div>
+                  <div className="font-medium truncate">{assignment.title_c}</div>
+                  <div className="text-gray-600 truncate">{course?.code_c}</div>
                 </div>
               );
             })}
@@ -142,12 +142,12 @@ const CalendarView = ({ assignments, courses }) => {
         <div className="flex flex-wrap items-center gap-4">
           <div className="text-sm font-medium text-gray-600">Courses:</div>
           {courses.slice(0, 4).map(course => (
-            <div key={course.Id} className="flex items-center space-x-2">
+<div key={course.Id} className="flex items-center space-x-2">
               <div 
                 className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: course.color }}
+                style={{ backgroundColor: course.color_c }}
               />
-              <span className="text-sm text-gray-600">{course.code}</span>
+              <span className="text-sm text-gray-600">{course.code_c}</span>
             </div>
           ))}
           {courses.length > 4 && (
