@@ -145,7 +145,7 @@ name="major_c"
         </label>
         <Input
           type="number"
-          name="year"
+name="year_c"
 value={formData.year_c}
           onChange={handleChange}
           placeholder="1-4"
@@ -154,7 +154,7 @@ value={formData.year_c}
           className={errors.year_c ? 'border-red-500' : ''}
           disabled={isLoading}
         />
-        {errors.year && (
+{errors.year_c && (
           <p className="text-red-500 text-sm mt-1">{errors.year}</p>
         )}
       </div>
@@ -165,7 +165,7 @@ value={formData.year_c}
         </label>
         <Input
           type="number"
-          name="gpa"
+name="gpa_c"
 value={formData.gpa_c}
           onChange={handleChange}
           placeholder="0.0-4.0"
@@ -175,7 +175,7 @@ value={formData.gpa_c}
           className={errors.gpa_c ? 'border-red-500' : ''}
           disabled={isLoading}
         />
-        {errors.gpa && (
+{errors.gpa_c && (
           <p className="text-red-500 text-sm mt-1">{errors.gpa}</p>
         )}
       </div>

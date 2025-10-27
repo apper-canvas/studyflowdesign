@@ -34,7 +34,7 @@ if (course) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.name.trim() || !formData.code.trim()) {
+if (!formData.name_c.trim() || !formData.code_c.trim()) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -51,23 +51,22 @@ if (course) {
   };
 
   const handleScheduleChange = (index, field, value) => {
-    const newSchedule = [...formData.schedule];
+const newSchedule = [...formData.schedule_c];
     newSchedule[index] = { ...newSchedule[index], [field]: value };
-    setFormData(prev => ({ ...prev, schedule: newSchedule }));
+    setFormData(prev => ({ ...prev, schedule_c: newSchedule }));
   };
 
-  const addScheduleSlot = () => {
+const addScheduleSlot = () => {
     setFormData(prev => ({
       ...prev,
-      schedule: [...prev.schedule, { day: "Monday", time: "10:00 AM - 11:30 AM" }]
+      schedule_c: [...prev.schedule_c, { day: "Monday", time: "10:00 AM - 11:30 AM" }]
     }));
   };
-
-  const removeScheduleSlot = (index) => {
-    if (formData.schedule.length > 1) {
+const removeScheduleSlot = (index) => {
+    if (formData.schedule_c.length > 1) {
       setFormData(prev => ({
         ...prev,
-        schedule: prev.schedule.filter((_, i) => i !== index)
+        schedule_c: prev.schedule_c.filter((_, i) => i !== index)
       }));
     }
   };
@@ -199,7 +198,7 @@ label="Semester"
                 className="flex-2"
               />
               
-              {formData.schedule.length > 1 && (
+{formData.schedule_c.length > 1 && (
                 <Button
                   type="button"
                   variant="ghost"

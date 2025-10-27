@@ -6,15 +6,15 @@ import { toast } from "react-toastify";
 import { format } from "date-fns";
 
 const AssignmentForm = ({ assignment, courses, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    courseId: "",
-    dueDate: "",
-    priority: "medium",
-    status: "pending",
-    weight: 10,
-    grade: ""
+const [formData, setFormData] = useState({
+    title_c: "",
+    description_c: "",
+    course_id_c: "",
+    due_date_c: "",
+    priority_c: "medium",
+    status_c: "pending",
+    weight_c: 10,
+    grade_c: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -22,19 +22,19 @@ const AssignmentForm = ({ assignment, courses, onSubmit, onCancel }) => {
   useEffect(() => {
     if (assignment) {
       setFormData({
-        title: assignment.title || "",
-        description: assignment.description || "",
-        courseId: assignment.courseId || "",
-        dueDate: assignment.dueDate ? format(new Date(assignment.dueDate), "yyyy-MM-dd'T'HH:mm") : "",
-        priority: assignment.priority || "medium",
-        status: assignment.status || "pending",
-        weight: assignment.weight || 10,
-        grade: assignment.grade || ""
+title_c: assignment.title_c || "",
+        description_c: assignment.description_c || "",
+        course_id_c: assignment.course_id_c || "",
+        due_date_c: assignment.due_date_c ? format(new Date(assignment.due_date_c), "yyyy-MM-dd'T'HH:mm") : "",
+        priority_c: assignment.priority_c || "medium",
+        status_c: assignment.status_c || "pending",
+        weight_c: assignment.weight_c || 10,
+        grade_c: assignment.grade_c || ""
       });
     } else if (courses.length > 0) {
       setFormData(prev => ({
-        ...prev,
-        courseId: courses[0].Id.toString()
+...prev,
+        course_id_c: courses[0].Id.toString()
       }));
     }
   }, [assignment, courses]);
@@ -95,7 +95,7 @@ const AssignmentForm = ({ assignment, courses, onSubmit, onCancel }) => {
         >
           <option value="">Select a course</option>
           {courses.map(course => (
-            <option key={course.Id} value={course.Id.toString()}>
+<option key={course.Id} value={course.Id}>
               {course.name} ({course.code})
             </option>
           ))}

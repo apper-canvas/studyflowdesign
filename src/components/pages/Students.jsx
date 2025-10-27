@@ -24,7 +24,7 @@ const [expandedStudent, setExpandedStudent] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
 const [formData, setFormData] = useState({
-name_c: '',
+    name_c: '',
     email_c: '',
     phone_c: '',
     major_c: '',
@@ -73,13 +73,13 @@ s?.name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
 
   const handleAddNew = () => {
     setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      major: '',
-      year: '',
-      gpa: '',
-      enrollmentDate: ''
+name_c: '',
+      email_c: '',
+      phone_c: '',
+      major_c: '',
+      year_c: '',
+      gpa_c: '',
+      enrollment_date_c: ''
     });
     setEditingStudent(null);
     setIsModalOpen(true);
@@ -88,7 +88,7 @@ s?.name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
 const handleOpenModal = (student = null) => {
 if (student) {
       setEditingStudent(student);
-      setFormData({
+setFormData({
         name_c: student.name_c || '',
         email_c: student.email_c || '',
         phone_c: student.phone_c || '',
@@ -100,13 +100,13 @@ if (student) {
     } else {
       setEditingStudent(null);
 setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        major: '',
-        year: '',
-        gpa: '',
-        enrollmentDate: new Date().toISOString().split('T')[0]
+name_c: '',
+        email_c: '',
+        phone_c: '',
+        major_c: '',
+        year_c: '',
+        gpa_c: '',
+        enrollment_date_c: new Date().toISOString().split('T')[0]
       });
     }
     setIsModalOpen(true);
@@ -116,13 +116,13 @@ setFormData({
     setIsModalOpen(false);
     setEditingStudent(null);
     setFormData({
-name: '',
-      email: '',
-      phone: '',
-      major: '',
-      year: '',
-      gpa: '',
-      enrollmentDate: ''
+name_c: '',
+      email_c: '',
+      phone_c: '',
+      major_c: '',
+      year_c: '',
+      gpa_c: '',
+      enrollment_date_c: ''
     });
   };
 

@@ -13,18 +13,18 @@ const AssignmentTable = ({ assignments, courses, onEdit, onDelete, onToggleStatu
   const [search, setSearch] = useState("");
 
   // Filter assignments
-  const filteredAssignments = assignments
+const filteredAssignments = assignments
     .filter(assignment => {
-      const course = courses.find(c => c.Id.toString() === assignment.courseId);
-      const matchesSearch = assignment.title.toLowerCase().includes(search.toLowerCase()) ||
-                          course?.name.toLowerCase().includes(search.toLowerCase());
-      const matchesCourse = filter.course === "all" || assignment.courseId === filter.course;
-      const matchesStatus = filter.status === "all" || assignment.status === filter.status;
-      const matchesPriority = filter.priority === "all" || assignment.priority === filter.priority;
+      const course = courses.find(c => c.Id.toString() === assignment.course_id_c.toString());
+      const matchesSearch = assignment.title_c.toLowerCase().includes(search.toLowerCase()) ||
+                          course?.name_c.toLowerCase().includes(search.toLowerCase());
+      const matchesCourse = filter.course === "all" || assignment.course_id_c.toString() === filter.course;
+      const matchesStatus = filter.status === "all" || assignment.status_c === filter.status;
+      const matchesPriority = filter.priority === "all" || assignment.priority_c === filter.priority;
       
       return matchesSearch && matchesCourse && matchesStatus && matchesPriority;
     })
-    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    .sort((a, b) => new Date(a.due_date_c) - new Date(b.due_date_c));
 
   const getPriorityIcon = (priority) => {
     switch (priority) {

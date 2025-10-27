@@ -87,10 +87,10 @@ function StudyTimer() {
 
     const endTime = new Date().toISOString();
     
-    try {
+try {
       await studySessionService.create({
-        startTime: sessionStartTime,
-        endTime: endTime
+        start_time_c: sessionStartTime,
+        end_time_c: endTime
       });
       
       await loadSessions();
@@ -227,7 +227,7 @@ function StudyTimer() {
             ) : (
               <div className="space-y-3">
                 {sessions.map((session) => (
-                  <div
+<div
                     key={session.Id}
                     className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200"
                   >
@@ -237,7 +237,7 @@ function StudyTimer() {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-800">
-                          {formatDuration(session.duration)}
+                          {formatDuration(session.duration_c)}
                         </div>
                         <div className="text-sm text-gray-500">
                           {format(new Date(session.endTime), 'MMM d, yyyy • h:mm a')}
