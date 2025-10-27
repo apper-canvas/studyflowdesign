@@ -23,7 +23,7 @@ const [expandedStudent, setExpandedStudent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
@@ -70,7 +70,7 @@ const [expandedStudent, setExpandedStudent] = useState(null);
   }
 
 const handleOpenModal = (student = null) => {
-    if (student) {
+if (student) {
       setEditingStudent(student);
       setFormData({
         name: student.name || '',
@@ -83,7 +83,7 @@ const handleOpenModal = (student = null) => {
       });
     } else {
       setEditingStudent(null);
-      setFormData({
+setFormData({
         name: '',
         email: '',
         phone: '',
@@ -100,7 +100,7 @@ const handleOpenModal = (student = null) => {
     setIsModalOpen(false);
     setEditingStudent(null);
     setFormData({
-      name: '',
+name: '',
       email: '',
       phone: '',
       major: '',
@@ -110,7 +110,7 @@ const handleOpenModal = (student = null) => {
     });
   };
 
-  const handleSubmitStudent = async (studentData) => {
+const handleSubmitStudent = async (studentData) => {
     setIsSubmitting(true);
     try {
       if (editingStudent) {
@@ -126,7 +126,9 @@ const handleOpenModal = (student = null) => {
       }
       handleCloseModal();
     } catch (err) {
-      toast.error(err?.message || 'Failed to save student');
+      const errorMessage = err?.message || 'Failed to save student';
+      toast.error(errorMessage);
+      console.error('Student save error:', err);
     } finally {
       setIsSubmitting(false);
     }

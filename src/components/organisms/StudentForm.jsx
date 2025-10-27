@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
-import Input from '@/components/atoms/Input';
-import Button from '@/components/atoms/Button';
-import ApperIcon from '@/components/ApperIcon';
+import React, { useEffect, useState } from "react";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import Input from "@/components/atoms/Input";
 
-function StudentForm({ onSubmit, onCancel, isLoading }) {
+function StudentForm({ onSubmit, onCancel, isLoading, initialStudent }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    grade: '',
     phone: '',
-    parentContact: ''
+    major: '',
+    year: '',
+    gpa: '',
+    enrollmentDate: ''
   });
 
+  useEffect(() => {
+    if (initialStudent) {
+      setFormData({
+        name: initialStudent.name || '',
+        email: initialStudent.email || '',
+        phone: initialStudent.phone || '',
+        major: initialStudent.major || '',
+        year: initialStudent.year || '',
+        gpa: initialStudent.gpa || '',
+        enrollmentDate: initialStudent.enrollmentDate || ''
+      });
+    }
+  }, [initialStudent]);
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -27,8 +42,11 @@ function StudentForm({ onSubmit, onCancel, isLoading }) {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    if (formData.grade && (isNaN(formData.grade) || formData.grade < 0 || formData.grade > 12)) {
-      newErrors.grade = 'Grade must be between 0 and 12';
+if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year > 4)) {
+      newErrors.year = 'Year must be between 1 and 4';
+    }
+    if (formData.gpa && (isNaN(formData.gpa) || formData.gpa < 0 || formData.gpa > 4)) {
+      newErrors.gpa = 'GPA must be between 0.0 and 4.0';
     }
 
     setErrors(newErrors);
@@ -58,7 +76,7 @@ function StudentForm({ onSubmit, onCancel, isLoading }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+<form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Name <span className="text-red-500">*</span>
@@ -76,7 +94,7 @@ function StudentForm({ onSubmit, onCancel, isLoading }) {
         )}
       </div>
 
-      <div>
+<div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Email <span className="text-red-500">*</span>
         </label>
@@ -94,27 +112,7 @@ function StudentForm({ onSubmit, onCancel, isLoading }) {
         )}
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Grade
-        </label>
-        <Input
-          type="number"
-          name="grade"
-          value={formData.grade}
-          onChange={handleChange}
-          placeholder="Enter grade (0-12)"
-          min="0"
-          max="12"
-          className={errors.grade ? 'border-red-500' : ''}
-          disabled={isLoading}
-        />
-        {errors.grade && (
-          <p className="text-red-500 text-sm mt-1">{errors.grade}</p>
-        )}
-      </div>
-
-      <div>
+<div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Phone
         </label>
@@ -130,13 +128,67 @@ function StudentForm({ onSubmit, onCancel, isLoading }) {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Parent Contact
+          Major
         </label>
         <Input
-          name="parentContact"
-          value={formData.parentContact}
+          name="major"
+          value={formData.major}
           onChange={handleChange}
-          placeholder="Parent name or contact info"
+          placeholder="e.g., Computer Science"
+          disabled={isLoading}
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Year
+        </label>
+        <Input
+          type="number"
+          name="year"
+          value={formData.year}
+          onChange={handleChange}
+          placeholder="1-4"
+          min="1"
+          max="4"
+          className={errors.year ? 'border-red-500' : ''}
+          disabled={isLoading}
+        />
+        {errors.year && (
+          <p className="text-red-500 text-sm mt-1">{errors.year}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          GPA
+        </label>
+        <Input
+          type="number"
+          name="gpa"
+          value={formData.gpa}
+          onChange={handleChange}
+          placeholder="0.0-4.0"
+          min="0"
+          max="4"
+          step="0.01"
+          className={errors.gpa ? 'border-red-500' : ''}
+          disabled={isLoading}
+        />
+        {errors.gpa && (
+          <p className="text-red-500 text-sm mt-1">{errors.gpa}</p>
+        )}
+      </div>
+
+<div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Enrollment Date
+        </label>
+        <Input
+          type="date"
+          name="enrollmentDate"
+          value={formData.enrollmentDate}
+          onChange={handleChange}
           disabled={isLoading}
         />
       </div>
