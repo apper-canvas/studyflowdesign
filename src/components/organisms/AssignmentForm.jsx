@@ -155,9 +155,10 @@ label="Status"
           type="number"
           min="1"
           max="100"
-          value={formData.weight_c}
+value={formData.weight_c}
           onChange={(e) => setFormData(prev => ({ ...prev, weight_c: e.target.value }))}
         />
+      </div>
       </div>
 
       {/* Grade Input - Only show if status is completed */}
