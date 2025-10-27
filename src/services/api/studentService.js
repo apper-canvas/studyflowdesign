@@ -32,23 +32,51 @@ export const studentService = {
 
   async update(id, studentData) {
     await delay();
-    const index = students.findIndex(s => s.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error('Student not found');
+// Validate ID parameter
+    if (id === null || id === undefined || id === '') {
+      throw new Error(`Invalid student ID provided: ${id}`);
     }
+    
+    const parsedId = parseInt(id);
+    if (isNaN(parsedId)) {
+      throw new Error(`Student ID must be a valid number. Received: ${id}`);
+    }
+    
+    const index = students.findIndex(s => s?.Id === parsedId);
+    if (index === -1) {
+      const availableIds = students.map(s => s?.Id).filter(Boolean).join(', ');
+      throw new Error(
+        `Student not found. Requested ID: ${parsedId} (original: ${id}). ` +
+        `Available student IDs: ${availableIds || 'none'}`
+      );
+    }
+
     students[index] = {
       ...students[index],
-      ...studentData,
-      Id: students[index].Id
+      Id: students[index].Id,
+      ...studentData
     };
-    return { ...students[index] };
+    return students[index];
   },
 
-  async delete(id) {
-    await delay();
-    const index = students.findIndex(s => s.Id === parseInt(id));
+  remove: (id) => {
+    // Validate ID parameter
+    if (id === null || id === undefined || id === '') {
+      throw new Error(`Invalid student ID provided: ${id}`);
+    }
+    
+    const parsedId = parseInt(id);
+    if (isNaN(parsedId)) {
+      throw new Error(`Student ID must be a valid number. Received: ${id}`);
+    }
+    
+    const index = students.findIndex(s => s?.Id === parsedId);
     if (index === -1) {
-      throw new Error('Student not found');
+      const availableIds = students.map(s => s?.Id).filter(Boolean).join(', ');
+      throw new Error(
+        `Student not found for deletion. Requested ID: ${parsedId} (original: ${id}). ` +
+        `Available student IDs: ${availableIds || 'none'}`
+      );
     }
     students.splice(index, 1);
     return { success: true };
