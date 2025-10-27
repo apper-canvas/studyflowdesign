@@ -1,0 +1,58 @@
+[
+  {
+    "Id": 1,
+    "name": "Computer Science Fundamentals",
+    "code": "CS 101",
+    "instructor": "Dr. Sarah Johnson",
+    "color": "#6366f1",
+    "schedule": [
+      {"day": "Monday", "time": "10:00 AM - 11:30 AM"},
+      {"day": "Wednesday", "time": "10:00 AM - 11:30 AM"}
+    ],
+    "credits": 3,
+    "semester": "Fall 2024",
+    "createdAt": "2024-01-15T09:00:00.000Z"
+  },
+  {
+    "Id": 2,
+    "name": "Calculus II",
+    "code": "MATH 152",
+    "instructor": "Prof. Michael Chen",
+    "color": "#8b5cf6",
+    "schedule": [
+      {"day": "Tuesday", "time": "2:00 PM - 3:30 PM"},
+      {"day": "Thursday", "time": "2:00 PM - 3:30 PM"}
+    ],
+    "credits": 4,
+    "semester": "Fall 2024",
+    "createdAt": "2024-01-15T09:00:00.000Z"
+  },
+  {
+    "Id": 3,
+    "name": "Introduction to Psychology",
+    "code": "PSYC 101",
+    "instructor": "Dr. Emily Rodriguez",
+    "color": "#ec4899",
+    "schedule": [
+      {"day": "Monday", "time": "1:00 PM - 2:30 PM"},
+      {"day": "Friday", "time": "1:00 PM - 2:30 PM"}
+    ],
+    "credits": 3,
+    "semester": "Fall 2024",
+    "createdAt": "2024-01-15T09:00:00.000Z"
+  },
+  {
+    "Id": 4,
+    "name": "English Composition",
+    "code": "ENG 110",
+    "instructor": "Prof. David Thompson",
+    "color": "#10b981",
+    "schedule": [
+      {"day": "Tuesday", "time": "9:00 AM - 10:30 AM"},
+      {"day": "Thursday", "time": "9:00 AM - 10:30 AM"}
+    ],
+    "credits": 3,
+    "semester": "Fall 2024",
+    "createdAt": "2024-01-15T09:00:00.000Z"
+  }
+]
