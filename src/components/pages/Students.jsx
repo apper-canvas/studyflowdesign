@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { studentService } from "@/services/api/studentService";
-import StudentForm from "@/components/organisms/StudentForm";
 import ApperIcon from "@/components/ApperIcon";
 import Badge from "@/components/atoms/Badge";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import Card from "@/components/atoms/Card";
+import StudentForm from "@/components/organisms/StudentForm";
 import FloatingActionButton from "@/components/organisms/FloatingActionButton";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
@@ -33,6 +33,22 @@ const [formData, setFormData] = useState({
     enrollmentDate: ''
   });
 
+const loadStudents = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await studentService.getAll();
+      setStudents(data || []);
+    } catch (err) {
+      const errorMessage = err?.message || 'Failed to load students';
+      setError(errorMessage);
+      toast.error(errorMessage);
+      console.error('Load students error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     loadStudents();
   }, []);
@@ -53,21 +69,21 @@ const [formData, setFormData] = useState({
     }
     
     setFilteredStudents(filtered);
-  }, [searchTerm, selectedGrade, students]);
+  }, [students, searchTerm, selectedGrade]);
 
-  async function loadStudents() {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await studentService.getAll();
-      setStudents(data || []);
-      setFilteredStudents(data || []);
-    } catch (err) {
-      setError(err?.message || 'Failed to load students');
-    } finally {
-      setLoading(false);
-    }
-  }
+  const handleAddNew = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      major: '',
+      year: '',
+      gpa: '',
+      enrollmentDate: ''
+    });
+    setEditingStudent(null);
+    setIsModalOpen(true);
+  };
 
 const handleOpenModal = (student = null) => {
 if (student) {
@@ -113,22 +129,21 @@ name: '',
 const handleSubmitStudent = async (studentData) => {
     setIsSubmitting(true);
     try {
-      if (editingStudent) {
-if (!editingStudent?.Id) {
-          toast.error('Invalid student data - missing ID');
-          return;
-        }
+      if (editingStudent && editingStudent.Id) {
+        // Updating existing student
         const updated = await studentService.update(editingStudent.Id, studentData);
         setStudents(prev => prev.map(s => 
           s.Id === editingStudent.Id ? { ...s, ...updated, Id: editingStudent.Id } : s
         ));
         toast.success('Student updated successfully');
       } else {
-        const newStudent = await studentService.create(studentData);
-        setStudents(prev => [...prev, newStudent]);
+        // Creating new student
+        const created = await studentService.create(studentData);
+        setStudents(prev => [created, ...prev]);
         toast.success('Student added successfully');
       }
-      handleCloseModal();
+      setIsModalOpen(false);
+      setEditingStudent(null);
     } catch (err) {
       const errorMessage = err?.message || 'Failed to save student';
       toast.error(errorMessage);
