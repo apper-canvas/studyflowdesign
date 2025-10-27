@@ -7,6 +7,7 @@ const Dashboard = lazy(() => import("@/components/pages/Dashboard"));
 const Courses = lazy(() => import("@/components/pages/Courses"));
 const Assignments = lazy(() => import("@/components/pages/Assignments"));
 const Calendar = lazy(() => import("@/components/pages/Calendar"));
+const StudyTimer = lazy(() => import("@/components/pages/StudyTimer"));
 const NotFound = lazy(() => import("@/components/pages/NotFound"));
 
 // Suspense wrapper component
@@ -48,6 +49,14 @@ const mainRoutes = [
     element: (
       <SuspenseWrapper>
         <Calendar />
+      </SuspenseWrapper>
+    )
+  },
+  {
+    path: "study-timer",
+    element: (
+      <SuspenseWrapper>
+        <StudyTimer />
       </SuspenseWrapper>
     )
   },

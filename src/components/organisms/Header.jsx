@@ -6,11 +6,12 @@ import ApperIcon from "@/components/ApperIcon";
 const Header = () => {
   const location = useLocation();
 
-  const navItems = [
+const navItems = [
     { path: "", label: "Dashboard", icon: "LayoutDashboard" },
     { path: "courses", label: "Courses", icon: "BookOpen" },
     { path: "assignments", label: "Assignments", icon: "FileText" },
-    { path: "calendar", label: "Calendar", icon: "Calendar" }
+    { path: "calendar", label: "Calendar", icon: "Calendar" },
+    { path: "study-timer", label: "Study Timer", icon: "Clock" }
   ];
 
   const isActive = (path) => {
@@ -37,7 +38,7 @@ const Header = () => {
           </div>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+<nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -65,7 +66,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div className="md:hidden border-t border-gray-200/80">
-          <div className="grid grid-cols-4 gap-1 py-2">
+<div className="grid grid-cols-5 gap-1 py-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
