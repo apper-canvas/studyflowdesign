@@ -7,6 +7,7 @@ const Dashboard = lazy(() => import("@/components/pages/Dashboard"));
 const Courses = lazy(() => import("@/components/pages/Courses"));
 const Assignments = lazy(() => import("@/components/pages/Assignments"));
 const Calendar = lazy(() => import("@/components/pages/Calendar"));
+const Students = lazy(() => import("@/components/pages/Students"));
 const StudyTimer = lazy(() => import("@/components/pages/StudyTimer"));
 const NotFound = lazy(() => import("@/components/pages/NotFound"));
 
@@ -50,6 +51,14 @@ const mainRoutes = [
       <SuspenseWrapper>
         <Calendar />
       </SuspenseWrapper>
+    )
+  },
+{
+    path: "students",
+    element: (
+      <Suspense fallback={<div>Loading.....</div>}>
+        <Students />
+      </Suspense>
     )
   },
   {

@@ -10,7 +10,8 @@ const navItems = [
     { path: "", label: "Dashboard", icon: "LayoutDashboard" },
     { path: "courses", label: "Courses", icon: "BookOpen" },
     { path: "assignments", label: "Assignments", icon: "FileText" },
-    { path: "calendar", label: "Calendar", icon: "Calendar" },
+{ path: "calendar", label: "Calendar", icon: "Calendar" },
+    { path: "students", label: "Students", icon: "Users" },
     { path: "study-timer", label: "Study Timer", icon: "Clock" }
   ];
 
