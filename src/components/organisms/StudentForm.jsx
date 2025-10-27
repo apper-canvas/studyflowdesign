@@ -203,7 +203,7 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
         >
           Cancel
         </Button>
-        <Button
+<Button
           type="submit"
           disabled={isLoading}
           className="flex-1"
@@ -211,12 +211,12 @@ if (formData.year && (isNaN(formData.year) || formData.year < 1 || formData.year
           {isLoading ? (
             <>
               <ApperIcon name="Loader2" size={16} className="animate-spin" />
-              Creating...
+              Saving...
             </>
           ) : (
             <>
-              <ApperIcon name="Plus" size={16} />
-              Add Student
+              <ApperIcon name="Save" size={16} />
+              Save
             </>
           )}
         </Button>
